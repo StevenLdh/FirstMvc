@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StevenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="StevenModelStoreContainer">
+    <EntitySet Name="books" EntityType="StevenModel.Store.books" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="userdetail" EntityType="StevenModel.Store.userdetail" store:Type="Tables" store:Schema="dbo" store:Name="userdetail">
+      <DefiningQuery>SELECT 
+      [userdetail].[username] AS [username], 
+      [userdetail].[userpass] AS [userpass], 
+      [userdetail].[role] AS [role], 
+      [userdetail].[regtime] AS [regtime], 
+      [userdetail].[lognum] AS [lognum]
+      FROM [dbo].[userdetail] AS [userdetail]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <EntityType Name="books">
+    <Key>
+      <PropertyRef Name="isbn" />
+    </Key>
+    <Property Name="isbn" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="bookName" Type="varchar" MaxLength="150" />
+    <Property Name="publisherID" Type="int" />
+    <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="count" Type="int" />
+    <Property Name="pic" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“haier.dbo.userdetail”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="userdetail">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="userpass" />
+    </Key>
+    <Property Name="username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="userpass" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="role" Type="int" />
+    <Property Name="regtime" Type="datetime" />
+    <Property Name="lognum" Type="decimal" Precision="11" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6013: 表/视图“haier.dbo.userinfo”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+      
+      <EntityType Name="userinfo">
+        <Property Name="stuid" Type="nvarchar" MaxLength="50" />
+        <Property Name="stuname" Type="nvarchar" MaxLength="50" />
+        <Property Name="sex" Type="varchar" MaxLength="2" />
+        <Property Name="score" Type="nvarchar" MaxLength="50" />
+      </EntityType>-->
+</Schema>

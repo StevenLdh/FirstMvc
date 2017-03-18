@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StevenModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="StevenEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="books" EntityType="StevenModel.books" />
+    <EntitySet Name="userdetail" EntityType="StevenModel.userdetail" />
+  </EntityContainer>
+  <EntityType Name="books">
+    <Key>
+      <PropertyRef Name="isbn" />
+    </Key>
+    <Property Name="isbn" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="bookName" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="publisherID" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="count" Type="Int32" />
+    <Property Name="pic" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="description" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="userdetail">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="userpass" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="userpass" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="role" Type="Int32" />
+    <Property Name="regtime" Type="DateTime" Precision="3" />
+    <Property Name="lognum" Type="Decimal" Precision="11" Scale="0" />
+  </EntityType>
+</Schema>

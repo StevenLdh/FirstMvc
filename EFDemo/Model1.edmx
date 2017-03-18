@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StevenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="StevenModelStoreContainer">
+          <EntitySet Name="books" EntityType="StevenModel.Store.books" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="userdetail" EntityType="StevenModel.Store.userdetail" store:Type="Tables" store:Schema="dbo" store:Name="userdetail">
+            <DefiningQuery>SELECT 
+      [userdetail].[username] AS [username], 
+      [userdetail].[userpass] AS [userpass], 
+      [userdetail].[role] AS [role], 
+      [userdetail].[regtime] AS [regtime], 
+      [userdetail].[lognum] AS [lognum]
+      FROM [dbo].[userdetail] AS [userdetail]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="books">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="bookName" Type="varchar" MaxLength="150" />
+          <Property Name="publisherID" Type="int" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="count" Type="int" />
+          <Property Name="pic" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“haier.dbo.userdetail”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="userdetail">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="userpass" />
+          </Key>
+          <Property Name="username" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="userpass" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="role" Type="int" />
+          <Property Name="regtime" Type="datetime" />
+          <Property Name="lognum" Type="decimal" Precision="11" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6013: 表/视图“haier.dbo.userinfo”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+      
+      <EntityType Name="userinfo">
+        <Property Name="stuid" Type="nvarchar" MaxLength="50" />
+        <Property Name="stuname" Type="nvarchar" MaxLength="50" />
+        <Property Name="sex" Type="varchar" MaxLength="2" />
+        <Property Name="score" Type="nvarchar" MaxLength="50" />
+      </EntityType>-->
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StevenModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StevenEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="books" EntityType="StevenModel.books" />
+          <EntitySet Name="userdetail" EntityType="StevenModel.userdetail" />
+        </EntityContainer>
+        <EntityType Name="books">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="bookName" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="publisherID" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="count" Type="Int32" />
+          <Property Name="pic" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="userdetail">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="userpass" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="userpass" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="role" Type="Int32" />
+          <Property Name="regtime" Type="DateTime" Precision="3" />
+          <Property Name="lognum" Type="Decimal" Precision="11" Scale="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StevenModelStoreContainer" CdmEntityContainer="StevenEntities">
+          <EntitySetMapping Name="books">
+            <EntityTypeMapping TypeName="StevenModel.books">
+              <MappingFragment StoreEntitySet="books">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="bookName" ColumnName="bookName" />
+                <ScalarProperty Name="publisherID" ColumnName="publisherID" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userdetail">
+            <EntityTypeMapping TypeName="StevenModel.userdetail">
+              <MappingFragment StoreEntitySet="userdetail">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userpass" ColumnName="userpass" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="regtime" ColumnName="regtime" />
+                <ScalarProperty Name="lognum" ColumnName="lognum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

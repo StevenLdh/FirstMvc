@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StevenModelStoreContainer" CdmEntityContainer="StevenEntities">
+    <EntitySetMapping Name="books">
+      <EntityTypeMapping TypeName="StevenModel.books">
+        <MappingFragment StoreEntitySet="books">
+          <ScalarProperty Name="isbn" ColumnName="isbn" />
+          <ScalarProperty Name="bookName" ColumnName="bookName" />
+          <ScalarProperty Name="publisherID" ColumnName="publisherID" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="pic" ColumnName="pic" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userdetail">
+      <EntityTypeMapping TypeName="StevenModel.userdetail">
+        <MappingFragment StoreEntitySet="userdetail">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="userpass" ColumnName="userpass" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="regtime" ColumnName="regtime" />
+          <ScalarProperty Name="lognum" ColumnName="lognum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
